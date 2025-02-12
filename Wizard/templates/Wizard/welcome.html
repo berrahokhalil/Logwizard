@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LogWizard - Home</title>
+        <link rel="stylesheet" href="{% static 'Wizard/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'Wizard/css/animate.min.css' %}">
+        <link rel="stylesheet" href="{% static 'Wizard/css/light-bootstrap-dashboard.css' %}">
+        <link rel="stylesheet" href="{% static 'Wizard/css/demo.css' %}">
+        <link rel="stylesheet" href="{% static 'Wizard/css/pe-icon-7-stroke.css' %}">
+    <style>
+            body {
+                background-color: #9368e9;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+
+            .wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 80%;
+                padding: 20px;
+            }
+
+            .main-panel {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .card {
+                border-radius: 8px;
+                width: 100%;
+                max-width: 500px;
+                padding: 20px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .header {
+                text-align: center;
+            }
+
+            .content {
+                margin-top: 20px;
+            }
+
+            .buttons {
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .buttons .btn {
+                width: 45%;
+                background-color: white;
+                color: #337ab7;
+                border-color: #337ab7;
+            }
+
+            .buttons .btn:hover,
+            .buttons .btn:focus,
+            .buttons .btn:active {
+                background-color: #e6e6e6;
+                color: #337ab7;
+                border-color: #2e6da4;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="main-panel">
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2 class="title">
+                                            Welcome to LogWizard ✨
+                                        </h2>
+                                    </div>
+                                    <div class="content">
+                                        <p>
+                                            Welcome to LogWizard, your
+                                            comprehensive solution for managing
+                                            log files. 🔍📂
+                                            Log in or sign up to get started.
+                                        </p>
+                                        <div class="buttons">
+                                            <button
+                                                type="button"
+                                                class="btn"
+                                                onclick="window.location.href='{% url 'login' %}'"
+                                            >
+                                            Log In 🔑
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn"
+                                                onclick="window.location.href='{% url 'register' %}'"
+                                            >
+                                            Sign Up 📝
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'Wizard/js/jquery.3.2.1.min.js' %}"></script>
+        <script src="{% static 'Wizard/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'Wizard/js/light-bootstrap-dashboard.js' %}"></script>
+    </body>
+</html>

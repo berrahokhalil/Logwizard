@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'Wizard/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Wizard/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Wizard/css/light-bootstrap-dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'Wizard/css/demo.css' %}">
+    <link rel="stylesheet" href="{% static 'Wizard/css/pe-icon-7-stroke.css' %}">
+    <style>
+        body {
+            background-color: #9368E9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 80%;
+            padding: 20px;
+        }
+
+        .main-panel {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            margin-top: 20px;
+        }
+
+        .btn-primary, .btn-custom {
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #337ab7;
+            border: 1px solid #337ab7;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #286090;
+            border-color: #204d74;
+        }
+
+        .btn-custom {
+            background-color: #ffffff;
+            border: 1px solid #337ab7;
+            color: #337ab7;
+            margin-top: 10px;
+        }
+
+        .btn-custom:hover {
+            background-color: #f2f2f2;
+        }
+
+        .btn-custom i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="main-panel">
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Login</h4>
+                                </div>
+                                <div class="content">
+                                    {% if message %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endif %}
+                                    <form action="{% url 'login' %}" method="post">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="email">Email address</label>
+                                            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                        <a href="{% url 'welcome' %}" class="btn btn-custom">
+                                            <i class="pe-7s-back"></i> Back ⬅️
+                                        </a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'Wizard/js/jquery.3.2.1.min.js' %}"></script>
+    <script src="{% static 'Wizard/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'Wizard/js/light-bootstrap-dashboard.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+{% extends 'Wizard/layout.html' %}
+{% load static %}
+
+{% block brand %}
+<span class="navbar-brand"> Dashboard </span>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Button to show the summary -->
+    <div class="row mb-3">
+        <div class="col-md-12 text-center">
+            <button id="showSummaryBtn" class="btn btn-primary">What's happening</button>
+        </div>
+    </div>
+
+    <!-- Summary bubble initially hidden -->
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div id="summaryBubble" class="chat-box bubble" style="display: none;">
+                <div class="message">
+                    <span class="text">{{ summary }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section for the charts -->
+    <div class="row mt-5">
+        <!-- Enlarged container for the error codes chart -->
+        <div class="col-md-8">
+            <canvas id="errorChart" width="600" height="400"></canvas> <!-- Adjusted size -->
+        </div>
+
+        <!-- OS (Operating Systems) chart -->
+        <div class="col-md-4">
+            <canvas id="osChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Include Chart.js from a CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Script to show or hide the summary bubble
+    document.addEventListener("DOMContentLoaded", function() {
+        const showSummaryBtn = document.getElementById('showSummaryBtn');
+        const summaryBubble = document.getElementById('summaryBubble');
+
+        showSummaryBtn.addEventListener('click', function() {
+            if (summaryBubble.style.display === 'none') {
+                summaryBubble.style.display = 'block';
+            } else {
+                summaryBubble.style.display = 'none';
+            }
+        });
+    });
+
+    // Data for the error codes chart
+    const errorData = {
+        labels: [{% for item in error_summary %}{{ item.code }}, {% endfor %}],
+        datasets: [{
+            label: 'Frequency of Error Codes',
+            data: [{% for item in error_summary %}{{ item.count }}, {% endfor %}],
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    const errorConfig = {
+        type: 'bar',
+        data: errorData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // Disable aspect ratio for custom size
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+    // Render the error codes chart
+    const errorChart = new Chart(
+        document.getElementById('errorChart'),
+        errorConfig
+    );
+
+    // Data for the Operating Systems (OS) chart
+    const osData = {
+        labels: [{% for item in os_summary %}'{{ item.OS }}', {% endfor %}],
+        datasets: [{
+            label: 'Frequency of OS',
+            data: [{% for item in os_summary %}{{ item.count }}, {% endfor %}],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    const osConfig = {
+        type: 'doughnut',
+        data: osData,
+        options: {
+            responsive: true
+        }
+    };
+
+    // Render the Operating Systems (OS) chart
+    const osChart = new Chart(
+        document.getElementById('osChart'),
+        osConfig
+    );
+</script>
+
+<!-- CSS for the speech bubble -->
+<style>
+    .bubble {
+        position: relative;
+        background: #f1f1f1;
+        border-radius: .4em;
+        padding: 15px;
+        margin-top: 10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .bubble:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -10px;
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        border-bottom-color: #f1f1f1;
+        border-top: 0;
+        margin-top: -10px;
+    }
+</style>
+{% endblock %}

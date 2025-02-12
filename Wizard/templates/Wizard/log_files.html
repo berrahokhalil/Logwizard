@@ -1,0 +1,153 @@
+{% extends 'Wizard/layout.html' %}
+{% load static %}
+
+{% block brand %}
+<span class="navbar-brand"> Log Files </span>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Dashboard</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- HTTP Status Code Chart -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">HTTP Status Codes</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="httpStatusChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Browser Chart -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Browser Distribution</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="browserChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- OS Chart -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Operating System Distribution</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="osChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Utilisez un CDN pour Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // HTTP Status Code Chart
+        var ctx1 = document.getElementById('httpStatusChart').getContext('2d');
+        var httpStatusChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: {{ code_labels|safe }},
+                datasets: [{
+                    label: 'HTTP Status Codes',
+                    data: {{ code_values|safe }},
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Browser Chart
+        var ctx2 = document.getElementById('browserChart').getContext('2d');
+        var browserChart = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: {{ browser_labels|safe }},
+                datasets: [{
+                    label: 'Browsers',
+                    data: {{ browser_values|safe }},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 205, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // OS Chart
+        var ctx3 = document.getElementById('osChart').getContext('2d');
+        var osChart = new Chart(ctx3, {
+            type: 'doughnut',
+            data: {
+                labels: {{ os_labels|safe }},
+                datasets: [{
+                    label: 'Operating Systems',
+                    data: {{ os_values|safe }},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 205, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    });
+</script>
+{% endblock %}
