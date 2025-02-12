@@ -46,22 +46,16 @@ LogWizard is a powerful log file management application designed to analyze, sto
    ```
 5. Access the application at:
    ```
-http://127.0.0.1:8000/
+   http://127.0.0.1:8000/
    ```
 
 ## Usage
-1. **Login/Register**: Create an account or log in.
-2. **Upload Logs**: Upload log files for processing.
-3. **View Statistics**: Analyze log files with interactive charts.
-4. **AI Summarization**: Get key insights via Google Gemini AI.
-5. **Manage Errors**: View error details and prioritize urgent issues.
+   1. **Login/Register**: Create an account or log in.
+   2. **Upload Logs**: Upload log files for processing.
+   3. **View Statistics**: Analyze log files with interactive charts.
+   4. **AI Summarization**: Get key insights via Google Gemini AI.
+   5. **Manage Errors**: View error details and prioritize urgent issues.
 
-## Contribution
-Feel free to fork the repository and submit pull requests for improvements!
 
-## License
-MIT License
 
-## Contact
-For inquiries, reach out to `your-email@example.com`.
 
