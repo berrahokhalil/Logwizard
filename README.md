@@ -56,6 +56,10 @@ LogWizard is a powerful log file management application designed to analyze, sto
    4. **AI Summarization**: Get key insights via Google Gemini AI.
    5. **Manage Errors**: View error details and prioritize urgent issues.
 
+## 📌 Credits  
 
+This project was developed by **Berraho Khalil** and **Hamdaoui Abdelhak**.  
+
+🚀 Happy coding!
 
 
